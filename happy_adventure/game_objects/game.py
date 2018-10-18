@@ -2,6 +2,8 @@ from ..pygame_api.pyapp import App
 from ..settings import IMAGES_PATH
 
 from ..game_objects.player import Character
+from ..game_objects.enviroment import Environ
+
 from ..map.world import Camera
 from ..map.map_creation import build_maze_map
 
@@ -13,14 +15,17 @@ class GameApp(App):
     def on_init(self):
         super().on_init()
 
-        self.world = build_maze_map(self._display, (100,100))
-        self.world.build()
-        self.world.pack(0,0)
+        world = build_maze_map(self._display, (100,100))
+        world.build()
+        world.pack(0,0)
 
-        self.player = Character(self._display, IMAGES_PATH+"player.png", 4, 9)
-        self.player.pack(8*64,7*64)
+        player = Character(self._display, IMAGES_PATH+"player.png", 4, 9)
+        player.pack(8*64,7*64)
 
-        self.camera = Camera(self.player)
-        self.world.camera = self.camera
+        camera = Camera(player)
+        world.camera = camera
 
+        self.environ = Environ(world, camera, player)
 
+    def on_loop(self):
+        self.environ.update()

@@ -15,7 +15,6 @@ class Sprite_animation():
         self.sprite_width = self.image_rect.width/self.cols
         self.sprite_height = self.image_rect.height/self.rows
 
-
     @property
     def sprite_size(self):
         return self.sprite_width,self.sprite_height
@@ -41,9 +40,11 @@ class Character(Sprite):
         self.sprite_animation = Sprite_animation(img_url, rows, cols, 0.5)
         width, height = self.sprite_animation.sprite_size
         super().__init__(display, width = width, height = height, flags=pygame.SRCALPHA, depth=32)
+        self.rect = pygame.Rect((0, 0, 25,27))
         self.velocity = 10
         self.set_colorkey((0,0,0))
         self.blit(self.sprite_animation.current_surface, (0,0))
+
 
     def key_press(self, event):
         self.sprite_animation.start()
@@ -67,18 +68,21 @@ class Character(Sprite):
         self.move(x,y)
 
     def key_release(self, event):
-        self.after_events = []
+        self.after_events = self.after_events[1:]
         self.sprite_animation.sprite_count = 0
         self.reload(None)
-        self.sprite_animation.start()
+        self.sprite_animation.stop()
 
     def reload(self, event):
         self.set_image()
         self.sprite_animation.play()
 
     def update(self):
+        self.rect.x = self.posX + 34
+        self.rect.y = self.posY + 60
         self.master.blit(self, (368,268))
 
     def set_image(self):
         image = self.sprite_animation.current_surface
         self.blit_array(pygame.surfarray.array2d(image))
+        #pygame.draw.rect(self,pygame.Color('gray') ,(self.posX+34,self.posY+60, self.rect.width, self.rect.height))

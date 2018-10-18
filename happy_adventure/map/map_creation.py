@@ -21,7 +21,7 @@ def build_environment_matrix(shape, objects_graph):
 
 def build_maze_map(display_surface, shape):
     grass_object = pygame.image.load(IMAGES_PATH+"grass.jpg")
-    ground_object = pygame.image.load(IMAGES_PATH+"ground.jpg")
+    ground_object = pygame.image.load(IMAGES_PATH+"new_ground.jpg")
     water_object = pygame.image.load(IMAGES_PATH+"water.png")
     objects_dict = {
         "grass": grass_object,
