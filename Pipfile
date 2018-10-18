@@ -1,0 +1,13 @@
+[[source]]
+name = "pypi"
+verify_ssl = true
+url = "https://pypi.org/simple"
+
+[dev-packages]
+
+[packages]
+pygame = "*"
+numpy = "*"
+
+[requires]
+python_version = "3.5"
