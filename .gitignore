@@ -1,2 +1,5 @@
 # pycache
 __pycache__/
+
+#vs code config file
+.vscode/
