@@ -37,7 +37,6 @@ def generate_map(dimention, num_tunnels, max_tunnel_lenght):
     for cont_tunnel in range(num_tunnels):
         corr_pos = random_walk(matrix, corr_pos, max_tunnel_lenght)
     
-
     return matrix
 
 

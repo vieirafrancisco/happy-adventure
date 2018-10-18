@@ -24,7 +24,7 @@ class MazeMap(Canvas):
         rect_list = []
         x_index = posX // self.block_size[0]
         y_index = posY // self.block_size[1]
-
+        
         for cont in range(x_index-1, x_index+2):
             for cont2 in range(y_index-1, y_index + 2):
                 if self.block_matrix[cont2][cont] == "ground":

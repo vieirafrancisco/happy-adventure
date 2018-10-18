@@ -44,6 +44,7 @@ class Character(Sprite):
         self.velocity = 10
         self.set_colorkey((0,0,0))
         self.blit(self.sprite_animation.current_surface, (0,0))
+        self.collide_direction = [0, 0, 0, 0]
 
 
     def key_press(self, event):
@@ -54,16 +55,20 @@ class Character(Sprite):
         x, y = 0, 0
         if event.key == pygame.K_UP:
             self.sprite_animation.section = 0
-            y = -self.velocity
+            if not self.collide_direction[0]:
+                y = -self.velocity
         elif event.key == pygame.K_DOWN:
             self.sprite_animation.section = 2
-            y = self.velocity
+            if not self.collide_direction[2]:
+                y = self.velocity
         elif event.key == pygame.K_LEFT:
             self.sprite_animation.section = 1
-            x = -self.velocity
+            if not self.collide_direction[1]:
+                x = -self.velocity
         elif event.key == pygame.K_RIGHT:
             self.sprite_animation.section = 3
-            x = self.velocity
+            if not self.collide_direction[3]:
+                x = self.velocity
 
         self.move(x,y)
 
