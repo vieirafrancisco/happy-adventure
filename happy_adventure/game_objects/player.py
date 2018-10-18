@@ -51,7 +51,6 @@ class Character(Sprite):
     
     def key_pressed(self, event):
         x, y = 0, 0
-
         if event.key == pygame.K_UP:
             self.sprite_animation.section = 0
             y = -self.velocity
@@ -65,7 +64,6 @@ class Character(Sprite):
             self.sprite_animation.section = 3
             x = self.velocity
 
-        
         self.move(x,y)
 
     def key_release(self, event):
@@ -75,9 +73,12 @@ class Character(Sprite):
         self.sprite_animation.start()
 
     def reload(self, event):
-        self.fill((0,0,0))
-        self.blit(self.sprite_animation.current_surface, (0,0))
+        self.set_image()
         self.sprite_animation.play()
 
     def update(self):
         self.master.blit(self, (368,268))
+
+    def set_image(self):
+        image = self.sprite_animation.current_surface
+        self.blit_array(pygame.surfarray.array2d(image))

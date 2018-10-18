@@ -33,15 +33,11 @@ class Canvas(Surface,Events):
             self.master.add_child(self)
 
     def update(self):
-        self.update_children()
+        for child in self.children:
+            child.update()
         
         if self.has_change():
             self.draw()
-        
-
-    def update_children(self):
-        for child in self.children:
-            child.update()
 
     def draw(self):
         self.master.blit(self, (self.posX,self.posY))
@@ -55,5 +51,10 @@ class Canvas(Surface,Events):
 
         for child in self.children:
             child.event_call(event)
-        
+    
+    @property
+    def array2d(self):
+        return surfarray.array2d(self)
 
+    def blit_array(self, array):
+        surfarray.blit_array(self, array)
